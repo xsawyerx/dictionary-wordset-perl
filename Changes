@@ -1,0 +1,10 @@
+{{$NEXT}}
+
+    * Introduce first version using github.com/wordset/wordset-dictionary
+      commit ID: f3aa8aca6ecbebb5a3a906da83ed669cad8def35.
+    * Supporting:
+        - Contains all the data in the module.
+        - You can access all the dictionary data.
+        - Support words, meanings, editors, and contributors.
+        - A utility script to serialize the content quickly to be shipped
+          with the module.

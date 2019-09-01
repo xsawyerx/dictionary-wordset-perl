@@ -1,0 +1,5 @@
+*.sw?
+wordset-dictionary
+Dictionary-Wordset-*
+Dictionary-Wordset-*.tar.gz
+

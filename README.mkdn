@@ -1,0 +1,21 @@
+# NAME
+
+Dictionary::Wordset - Perl interface to Wordset
+
+# VERSION
+
+version 0.001
+
+# Foo
+
+# AUTHOR
+
+Sawyer X <xsawyerx@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2019 by Sawyer X.
+
+This is free software, licensed under:
+
+    The MIT (X11) License
