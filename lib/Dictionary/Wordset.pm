@@ -135,3 +135,104 @@ __PACKAGE__->meta->make_immutable();
 __END__
 
 =pod
+
+=head1 SYNOPSIS
+
+    # This is for nicer syntax
+    use feature      qw< say >;
+    use experimental qw< postderef >;
+    use Dictionary::Wordset;
+
+    my $wordset = Dictionary::Wordset->new();
+    my $word    = $wordset->word('hello');
+
+    say "Word: ", $word->word;
+    say "  * Editors: ",      join ', ', $word->editors->@*;
+    say "  * Contributors: ", join ', ', $word->contributors->@*;
+    say "  * Meanings:";
+
+    foreach my $meaning ( $word->meanings->@* ) {
+        say "    * Definition: ", $meaning->def;
+        say "    * Speech part: ", $meaning->speech_part;
+        say "    * Example: ", $meaning->example if $meaning->example;
+
+        if ( $meaning->synonyms ) {
+            say "    * Synonyms: ", join ', ', $meaning->synonyms->@*;
+        }
+    }
+
+=head1 DESCRIPTION
+
+This module is an interface to the
+L<Wordset word dictionary|https://github.com/wordset/wordset-dictionary>.
+
+It embeds the entire dictionary as part of the distribution, so you don't
+need to download it separately.
+
+There are scripts available to create a DB from the original data, and you
+can manually use your copy if you wish.
+
+=head1 DICTIONARY VERSION
+
+This version is using the dicitonary version at commit
+C<f3aa8aca6ecbebb5a3a906da83ed669cad8def35>.
+
+=head1 METHODS
+
+=head2 new(OPTIONS)
+
+    my $wordset = Dictionary::Wordset->new(...);
+
+    my $wordset = Dictionary::Wordset->new(
+        'db_file' => $path_to_sqlite_db_file,
+    );
+
+    my $wordset = Dictionary::Wordset->new(
+        'dbh' => $db_object_from_DBI
+    );
+
+Create a new Wordset object.
+
+Available arguments:
+
+=over 4
+
+=item * C<db_file>
+
+Location to the SQLite DB file.
+
+=item * C<dbh>
+
+A C<DBI> filehandle to use instead of loading the file. This is useful
+if you're opening an object yourself, maybe from memory, for testing maybe.
+
+=back
+
+=head2 word($word)
+
+    my $word_object = $wordset->word($my_word_string);
+
+Fetch a word from Wordset. Currently this runs an exact word match.
+
+You receive a C<Dictionary::Wordset::Word> object. Check that class to understand
+how to use it.
+
+=head1 LIMITATIONS
+
+=over 4
+
+=item * You can only search for an exact word
+
+=item * The words are available verbatim, case sensitive
+
+=back
+
+Patches welcome.
+
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<Wordset word dictionary|https://github.com/wordset/wordset-dictionary>.
+
+=back
